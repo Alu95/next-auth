@@ -14,7 +14,7 @@ const __NEXTAUTH = {
     ? process.env.NEXTAUTH_URL || process.env.VERCEL_URL || 'http://localhost:3000'
     : '',
   basePath: (typeof window === 'undefined')
-    ? process.env.NEXTAUTH_BASE_PATH|| '/api/auth'
+    ? process.env.NEXTAUTH_BASE_PATH || '/api/auth'
     : '/api/auth',
   clientMaxAge: 0, // e.g. 0 == disabled, 60 == 60 seconds
   eventListenerAdded: false
@@ -46,7 +46,7 @@ const getSession = async ({ req } = {}) => {
 const getCsrfToken = async ({ req }) => {
   const baseUrl = _baseUrl()
   const fetchOptions = req ? { headers: { cookie: req.headers.cookie } } : {}
-  const data = await _fetchData(`${baseUrl}/csrf`. fetchOptions)
+  const data = await _fetchData(`${baseUrl}/csrf`, fetchOptions)
   return data && data.csrfToken ? data.csrfToken : null
 }
 
@@ -120,7 +120,7 @@ const useSessionData = (session) => {
 
 // Client side method
 const signIn = async (provider, args) => {
-  const baseUrl = _baseUrl()  
+  const baseUrl = _baseUrl()
   const callbackUrl = (args && args.callbackUrl) ? args.callbackUrl : window.location
   const providers = await getProviders()
 
@@ -244,5 +244,5 @@ export default {
   providers: getProviders,
   csrfToken: getCsrfToken,
   signin: signIn,
-  signout: signOut,
+  signout: signOut
 }
